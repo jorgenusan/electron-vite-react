@@ -1,7 +1,8 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+
 
 function createWindow(): void {
   // Create the browser window.
@@ -12,8 +13,10 @@ function createWindow(): void {
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
     }
   })
 
@@ -39,6 +42,20 @@ function createWindow(): void {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  const { ipcMain } = require('electron');
+  const fs = require('fs').promises;
+  
+  ipcMain.handle('read-file', async (event, path) => {
+    try {
+      const content = await fs.readFile(path, 'utf-8');
+      return content;
+    } catch (err) {
+      console.error('Failed to read file', err);
+      throw err;
+    }
+  });
+
+
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
 
@@ -47,6 +64,7 @@ app.whenReady().then(() => {
   // see https://github.com/alex8088/electron-toolkit/tree/master/packages/utils
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
+    window.webContents.openDevTools() // Open DevTools
   })
 
   // IPC test
