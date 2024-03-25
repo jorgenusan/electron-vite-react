@@ -45,6 +45,7 @@
     "autoprefixer": "^10.4.19",
     "daisyui": "^4.7.3",
     "electron": "^28.2.0",
+    "electron-builder": "^24.13.3",
     "electron-vite": "^2.0.0",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
