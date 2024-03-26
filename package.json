@@ -23,10 +23,14 @@
     "make": "electron-forge make"
   },
   "dependencies": {
+    "-": "^0.0.1",
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
+    "@mdxeditor/editor": "^2.18.0",
+    "D": "^1.0.0",
     "electron-squirrel-startup": "^1.0.0",
-    "electron-updater": "^6.1.7"
+    "electron-updater": "^6.1.7",
+    "react-icons": "^5.0.1"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.3.1",
@@ -38,22 +42,27 @@
     "@electron-toolkit/eslint-config-prettier": "^2.0.0",
     "@electron-toolkit/eslint-config-ts": "^1.0.1",
     "@electron-toolkit/tsconfig": "^1.0.1",
+    "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^18.19.9",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
+    "clsx": "^2.1.0",
     "daisyui": "^4.7.3",
     "electron": "^28.2.0",
     "electron-builder": "^24.13.3",
     "electron-vite": "^2.0.0",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
+    "fs-extra": "^11.2.0",
+    "jotai": "^2.7.1",
     "postcss": "^8.4.38",
     "prettier": "^3.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
+    "tailwind-merge": "^2.2.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
     "vite": "^5.0.12"
