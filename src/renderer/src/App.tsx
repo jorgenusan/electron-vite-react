@@ -4,6 +4,7 @@ import FloatingNoteTitle from './components/FloatingNoteTitle'
 import { useRef } from 'react'
 import ActionButtonsRow from './components/ActionButtonsRow'
 import NotePreviewList from './components/NotePreviewList'
+import TabNotes from './components/TabNotes'
 
 const App = () => {
   const contentConatinerRef = useRef<HTMLDivElement>(null)
@@ -21,7 +22,8 @@ const App = () => {
         </Sidebar>
 
         <Content ref={contentConatinerRef} className="border-l bg-zinc-900/50 border-l-white/20">
-          <FloatingNoteTitle />
+          <TabNotes />
+          {/* <FloatingNoteTitle /> */}
           <MarkdownEditor />
         </Content>
       </RootLayout>

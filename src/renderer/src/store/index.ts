@@ -13,6 +13,8 @@ export const notesAtom = unwrap(noteAtomAsync, (prev) => prev)
 
 export const selectedNoteIndexAtom = atom<number | null>(null)
 
+export const openedTabsAtom = atom<NoteInfo[]>([]);
+
 const selectedNoteAtomAsync = atom(async (get) => {
   const notes = get(notesAtom)
   const index = get(selectedNoteIndexAtom)
