@@ -6,6 +6,7 @@ import { CreateNote, DeleteNote, GetNotes, ReadNote } from '@shared/types'
 import { dialog } from 'electron'
 import path from 'path'
 import { isEmpty } from 'lodash'
+import welcomeNoteFile from '../../../resources/welcomeNote.md?asset'
 
 export const getRootPath = () => {
   return `${homedir()}\\${appDirectoryName}`
@@ -26,7 +27,7 @@ export const getNotes: GetNotes = async () => {
   if (isEmpty(notes)) { //TODO: if its empty, raise an error.
     console.info('No notes found, creating a welcome note')
 
-    const content = await readFile('', { encoding: fileEncoding })
+    const content = await readFile(welcomeNoteFile, { encoding: fileEncoding })
 
     // create the welcome note
     await writeFile(`${rootDir}/${welcomeNoteFilename}`, content, { encoding: fileEncoding })
