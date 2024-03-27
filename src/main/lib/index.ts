@@ -1,8 +1,8 @@
 import { homedir } from 'os'
 import { appDirectoryName, fileEncoding, welcomeNoteFilename } from '@shared/constants'
-import { ensureDir, readdir, stat, readFile, writeFile } from 'fs-extra'
+import { ensureDir, readdir, stat, readFile, writeFile, remove } from 'fs-extra'
 import { NoteInfo } from '@shared/models'
-import { CreateNote, GetNotes, ReadNote } from '@shared/types'
+import { CreateNote, DeleteNote, GetNotes, ReadNote } from '@shared/types'
 import { dialog } from 'electron'
 import path from 'path'
 import { isEmpty } from 'lodash'
@@ -23,7 +23,7 @@ export const getNotes: GetNotes = async () => {
 
   const notes = notesFileNames.filter((fileName) => fileName.endsWith('.md'))
 
-  if (isEmpty(notes)) {
+  if (isEmpty(notes)) { //TODO: if its empty, raise an error.
     console.info('No notes found, creating a welcome note')
 
     const content = await readFile('', { encoding: fileEncoding })
@@ -95,4 +95,27 @@ export const createNote: CreateNote = async () => {
   await writeFile(filePath, '')
 
   return filename
+}
+
+export const deleteNote: DeleteNote = async (fileName: string) => {
+  const rootPath = getRootPath()
+  const filePath = `${rootPath}/${fileName}.md`
+
+  const { response } = await dialog.showMessageBox({
+    type: 'warning',
+    title: 'Delete note',
+    message: `Are you sure you want to delete ${fileName}?`,
+    buttons: ['Yes', 'No'],
+    defaultId: 1,
+    cancelId: 1
+  })
+
+  if (response === 1) {
+    console.info('Note deletion canceled')
+    return false
+  }
+
+  console.info(`Deleting note: ${fileName}`)
+  await remove(filePath)
+  return true
 }
