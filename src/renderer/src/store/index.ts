@@ -55,6 +55,8 @@ export const createEmptyNoteAtom = atom(null, async (get, set) => {
 
   set(notesAtom, [newNote, ...notes.filter((note) => note.title !== newNote.title)])
   set(selectedNoteIndexAtom, 0)
+
+  return newNote
 })
 
 export const deleteNoteAtom = atom(null, async (get, set) => {
@@ -76,6 +78,8 @@ export const deleteNoteAtom = atom(null, async (get, set) => {
     notes.filter((note) => note.title !== selectedNote.title)
   )
   set(selectedNoteIndexAtom, null)
+
+  return null
 })
 
 export const saveNoteAtom = atom(null, (get, set, newContent: NoteContent) => {
@@ -93,4 +97,6 @@ export const saveNoteAtom = atom(null, (get, set, newContent: NoteContent) => {
       note.title === selectedNote.title ? { ...note, lastEditTime: Date.now() } : note
     )
   )
+
+  return null
 })
