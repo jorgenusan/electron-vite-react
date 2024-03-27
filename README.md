@@ -1,6 +1,6 @@
-# electron-vite-react
+# markdown-notes-app
 
-An Electron application with React and TypeScript
+Markdown notes application built with Electron, React and Typescript
 
 ## Recommended IDE Setup
 
